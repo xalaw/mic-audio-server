@@ -1,12 +1,31 @@
+
 const path = require('path');
 const express = require('express');
-
 const app = express();
+const multer = require('multer');
+const upload = multer({ dest: './audioupload'});
 
 // API endpoints go here!
+app.use(express.static('public'));
+app.use(express.static('audioupload'));
 
+app.post('/audioupload', upload.single(), function(req, res) {
+    try{
+    console.log('body => ', req.body);
+    console.log('req =>', req);
+    console.log('files => ', req.files);
+    const audioFile = req.file;
+    upload.req.file;
+    res.send({ fileName: audioFile.filename, originalName: audioFile.originalname });
+    }
+    catch(e){
+    console.log(e);
+    res.sendStatus(400);
+    }
 
+});
 // Serve the built client
+
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // Unhandled requests which aren't for the API should serve index.html so
