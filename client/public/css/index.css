@@ -1,0 +1,20 @@
+canvas {
+  width:250px;
+  display: block;
+}
+.record {
+  width: 250px;
+  height: 40px;
+  border: 1px solid lightblue;
+  text-align:center;
+  line-height: 2.4em;
+  display:block;
+}
+
+.stop {
+  width: 250px;
+  height: 40px;
+  border: 1px solid pink;
+  text-align:center;
+  line-height: 2.4em;
+}
