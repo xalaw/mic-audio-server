@@ -88,6 +88,16 @@ if (navigator.getUserMedia) {
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
+
+      var request = new XMLHttpRequest();
+      request.open("POST", 'http://localhost:3001/', true);
+      request.responseType = "blob";
+      request.onload = function(){
+       // send the blob somewhere else or handle it here
+       // use request.response
+      }
+      request.send();
+
       console.log(audioURL);
       console.log("recorder stopped");
 
