@@ -21,6 +21,7 @@
   "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "cross-env": "^3.1.4",
     "express": "^4.14.1",
     "http-proxy-middleware": "^0.17.3",

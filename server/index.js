@@ -3,16 +3,24 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const multer = require('multer');
+const bodyParser = require('body-parser');
 const upload = multer({ dest: './audioupload'});
 
 // API endpoints go here!
 app.use(express.static('public'));
 app.use(express.static('audioupload'));
 
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.raw({ type: 'audio/ogg', limit: '50mb' }));
+
+
+app.post('/captureAudio', function(res, req) {
+    console.log('/captureAudio : body => ', req.body);
+});
+
 app.post('/audioupload', upload.single(), function(req, res, next) {
     try{
     console.log('body => ', req.body);
-    console.log('req =>', req);
     console.log('files => ', req.files);
     const audioFile = req.file;
     upload.req.file;
@@ -22,7 +30,7 @@ app.post('/audioupload', upload.single(), function(req, res, next) {
     console.log(e);
     res.sendStatus(400);
     }
-
+    next();
 });
 // Serve the built client
 
