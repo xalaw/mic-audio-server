@@ -82,8 +82,9 @@ if (navigator.getUserMedia) {
       clipContainer.appendChild(clipLabel);
       clipContainer.appendChild(deleteButton);
       soundClips.appendChild(clipContainer);
-
       audio.controls = true;
+
+
       var blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
