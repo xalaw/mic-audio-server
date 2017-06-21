@@ -5,25 +5,37 @@ const app = express();
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const upload = multer({ dest: './audioupload'});
+const fs = require('fs');
 
 // API endpoints go here!
 app.use(express.static('public'));
 app.use(express.static('audioupload'));
 
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended:false }));
+// app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.raw({ type: 'audio/ogg', limit: '50mb' }));
 
 
 app.post('/captureAudio', function(res, req) {
     console.log('/captureAudio : body => ', req.body);
+    fs.writeFile('audio01.ogg', req.body, function(err){
+        if(err) {
+            console.log('Error in writing file: ', err);
+        }
+    })
 });
 
 app.post('/audioupload', upload.single(), function(req, res, next) {
+    console.log('audioupload got a req: ', req);
     try{
     console.log('body => ', req.body);
     console.log('files => ', req.files);
     const audioFile = req.file;
-    upload.req.file;
+    fs.writeFile('audio02.ogg', req.body, function(err){
+        if(err) {
+            console.log('Error in writing file: ', err);
+        }
+    })
     res.send({ fileName: audioFile.filename, originalName: audioFile.originalname });
     }
     catch(e){
